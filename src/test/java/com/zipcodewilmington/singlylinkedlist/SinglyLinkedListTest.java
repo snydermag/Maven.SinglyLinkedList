@@ -122,12 +122,33 @@ public class SinglyLinkedListTest {
 
     // METHOD CONTAINS
     @Test
-    public void testContains() {
+    public void testContains0() {
         SinglyLinkedList<Integer> llist = new SinglyLinkedList<>();
         llist.add(5);
         llist.add(7);
         llist.add(9);
         Assert.assertTrue(llist.contains(5));
+    }
+
+    @Test
+    public void testContains2() {
+        SinglyLinkedList<Integer> llist = new SinglyLinkedList<>();
+        llist.add(5);
+        llist.add(7);
+        llist.add(9);
+        Assert.assertTrue(llist.contains(5));
+        Assert.assertTrue(llist.contains(7));
+
+    }
+
+    @Test
+    public void testContainsFalse() {
+        SinglyLinkedList<Integer> llist = new SinglyLinkedList<>();
+        llist.add(5);
+        llist.add(7);
+        llist.add(9);
+        Assert.assertFalse(llist.contains(4));
+
     }
 
 
