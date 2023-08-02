@@ -77,7 +77,14 @@ public class SinglyLinkedList<T> implements LinkedListIface{
 
     @Override
     public int size() {
-        return 0;
+        if (this.isEmpty()) return 0;
+        int n = 0;
+        Node<T> temp = head;
+        do {
+            n++;
+            temp = temp.getNext();
+        } while (temp != null);
+        return n;
     }
 
     @Override
