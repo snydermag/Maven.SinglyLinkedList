@@ -81,4 +81,24 @@ public class SinglyLinkedListTest {
         Assert.assertEquals(2, llist.size());
     }
 
+    // METHOD FIND
+    @Test
+    public void testFind0(){
+        SinglyLinkedList<Integer> llist = new SinglyLinkedList<>();
+        Assert.assertEquals(-1, llist.find(1));
+    }
+
+    @Test
+    public void testFind1(){
+        SinglyLinkedList<Integer> llist = new SinglyLinkedList<>();
+        llist.add(1);
+        Assert.assertEquals(0, llist.find(1));
+    }
+
+    @Test
+    public void testFind1A(){
+        SinglyLinkedList<Integer> llist = new SinglyLinkedList<>();
+        llist.add(1);
+        Assert.assertEquals(llist.size() - 1, llist.find(1));
+    }
 }
