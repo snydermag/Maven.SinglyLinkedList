@@ -2,16 +2,17 @@ package com.zipcodewilmington.singlylinkedlist;
 
 import java.util.Comparator;
 
-public interface LinkedListIface <T> {
+public interface LinkedListIface <T extends Comparable<T> > {
 
-    public void add(T data);
-    public void remove(int index) throws IndexOutOfBoundsException;
-    public T get(int index) throws IndexOutOfBoundsException;
-    public boolean contains(T data);
-    public int find(T data);
-    public int size();
-    public SinglyLinkedList<T> copy();
+    void add(T data);
+    void remove(int index) throws IndexOutOfBoundsException;
+    T get(int index) throws IndexOutOfBoundsException;
+    boolean contains(T data);
+    int find(T data);
 
-    public void sort(Comparator<T> comparator);
+    int size();
+    SinglyLinkedList<T> copy();
 
-    }
+    void sort();
+
+}

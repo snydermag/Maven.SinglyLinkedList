@@ -2,6 +2,7 @@ package com.zipcodewilmington.singlylinkedlist;
 
 import org.junit.Assert;
 import org.junit.Test;
+import com.zipcodewilmington.singlylinkedlist.Node;
 
 /**
  * Created by leon on 1/10/18.
@@ -151,5 +152,124 @@ public class SinglyLinkedListTest {
 
     }
 
+    @Test
+    public void testGet0() {
+        SinglyLinkedList<Integer> llist = new SinglyLinkedList<>();
+        llist.add(5);
+        llist.add(7);
+        llist.add(9);
+        int temp = llist.get(0);
+
+        Assert.assertEquals(5, temp);
+    }
+
+    @Test
+    public void testGet2() {
+        SinglyLinkedList<Integer> llist = new SinglyLinkedList<>();
+        llist.add(5);
+        llist.add(7);
+        llist.add(9);
+        int temp = llist.get(2);
+
+        Assert.assertEquals(9, temp);
+    }
+
+    @Test
+    public void testGet1() {
+        SinglyLinkedList<Integer> llist = new SinglyLinkedList<>();
+        Node temp = new Node(9);
+        llist.add(temp);
+        int actual = llist.get(0);
+
+        Assert.assertEquals(temp.getData(), actual);
+    }
+
+    @Test
+    public void testGet3() {
+        SinglyLinkedList<Integer> llist = new SinglyLinkedList<>();
+        Node temp = new Node(9);
+        Node temp1 = new Node(3);
+        llist.add(temp);
+        llist.add(temp1);
+        int actual = llist.get(1);
+
+        Assert.assertEquals(temp1.getData(), actual);
+    }
+
+
+    @Test
+    public void testRemove3() {
+        SinglyLinkedList<Integer> llist = new SinglyLinkedList<>();
+
+        llist.add(4);
+        llist.add(8);
+        llist.add(12);
+        llist.add(16);
+        llist.remove(2);
+
+        int actual = llist.size();
+
+        Assert.assertEquals(3, actual);
+    }
+
+    @Test
+    public void testRemove4() {
+        SinglyLinkedList<Integer> llist = new SinglyLinkedList<>();
+
+        llist.add(4);
+        llist.add(8);
+        llist.add(12);
+        llist.add(16);
+        llist.remove(2);
+
+        int actual = llist.get(2);
+
+
+        Assert.assertEquals(16, actual);
+    }
+
+    @Test
+    public void testCopy0() {
+        SinglyLinkedList<Integer> llist = new SinglyLinkedList<>();
+
+        SinglyLinkedList<Integer> copy = llist.copy();
+
+        Assert.assertEquals(llist.toString(), copy.toString());
+    }
+
+    @Test
+    public void testCopy1() {
+        SinglyLinkedList<Integer> llist = new SinglyLinkedList<>();
+        llist.add(4);
+
+        SinglyLinkedList<Integer> copy = llist.copy();
+
+        Assert.assertEquals(llist.toString(), copy.toString());
+    }
+
+    @Test
+    public void testCopy2() {
+        SinglyLinkedList<Integer> llist = new SinglyLinkedList<>();
+        llist.add(4);
+        llist.add(8);
+
+        SinglyLinkedList<Integer> copy = llist.copy();
+
+        Assert.assertEquals(llist.toString(), copy.toString());
+    }
+
+
+    @Test
+    public void testCopy4() {
+        SinglyLinkedList<Integer> llist = new SinglyLinkedList<>();
+        llist.add(4);
+        llist.add(8);
+        llist.add(12);
+        llist.add(16);
+
+        SinglyLinkedList<Integer> copy = llist.copy();
+
+        Assert.assertEquals(llist.toString(), copy.toString());
+    }
 
 }

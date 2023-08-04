@@ -1,11 +1,11 @@
 package com.zipcodewilmington.singlylinkedlist;
 
-import java.util.Comparator;
+
 
 /**
  * Created by leon on 1/10/18.
  */
-public class SinglyLinkedList<T> implements LinkedListIface{
+public class SinglyLinkedList<T extends Comparable<T>> implements LinkedListIface{
 
     private Node<T> head = null;
 
@@ -17,8 +17,7 @@ public class SinglyLinkedList<T> implements LinkedListIface{
         return head == null;
     }
 
-    @Override
-    public void add(Object data) {
+    public void add(Comparable data) {
         Node newNode = new Node(data);
         if (this.head == null) {
             this.head = newNode;
@@ -29,6 +28,19 @@ public class SinglyLinkedList<T> implements LinkedListIface{
                 temp = temp.getNext();
             }
             temp.setNext(newNode);
+        }
+    }
+
+    public void add(Node data) {
+        if (this.head == null) {
+            this.head = data;
+        }
+        else {
+            Node<T> temp = head;
+            while(temp.hasNext()){ // walk to end
+                temp = temp.getNext();
+            }
+            temp.setNext(data);
         }
     }
 
@@ -55,23 +67,41 @@ public class SinglyLinkedList<T> implements LinkedListIface{
         return sb.toString();
     }
 
-    @Override
-    public void remove(int index) throws IndexOutOfBoundsException {
-
+    public void remove(int index) throws IndexOutOfBoundsException{
+        Node<T> temp = this.head;
+        if(index == 0){
+            this.head = this.head.getNext();
+        }
+        else {
+            for (int i = 0; i < index - 1; i++) {
+                if (temp.hasNext()) {
+                    temp = temp.getNext();
+                } else {
+                    throw new IndexOutOfBoundsException();
+                }
+            }
+            temp.setNext(temp.getNext().getNext());
+        }
     }
 
-    @Override
-    public Object get(int index) throws IndexOutOfBoundsException {
-        return null;
+    public T get(int index) throws IndexOutOfBoundsException{
+        Node<T> temp = this.head;
+        for(int i = 0; i < index; i++){
+            if(temp.hasNext()){
+                temp = temp.getNext();
+            }
+            else{
+                throw new IndexOutOfBoundsException();
+            }
+        }
+        return temp.getData();
     }
 
-    @Override
-    public boolean contains(Object data) {
+    public boolean contains(Comparable data) {
         return (this.find(data) != -1);
     }
 
-    @Override
-    public int find(Object data) {
+    public int find(Comparable data) {
         if (this.isEmpty()) return -1;
         int found = -1;
 
@@ -100,13 +130,37 @@ public class SinglyLinkedList<T> implements LinkedListIface{
         return n;
     }
 
-    @Override
-    public SinglyLinkedList copy() {
-        return null;
+    public SinglyLinkedList<T> copy(){
+        SinglyLinkedList<T> copyList = new SinglyLinkedList<T>();
+        Node<T> temp = this.head;
+        while(temp != null){
+            copyList.add(temp.getData());
+            temp = temp.getNext();
+        }
+        return copyList;
     }
 
-    @Override
-    public void sort(Comparator comparator) {
+    public void sort(){
+        boolean notSorted = true;
+        Node<T> temp = this.head;
+        Node<T> next;
+        while(notSorted){
+            notSorted = false;
+            while(temp.hasNext()){
+                next = temp.getNext();
+                //if(comparator.compare(temp.getData(), next.getData()) > 0){
+                if(temp.compareTo(next) > 0){
+                    swap(temp, next);
+                    notSorted = true;
+                }
+                temp = temp.getNext();
+            }
+        }
+    }
 
+    public void swap(Node<T> node1, Node<T> node2){
+        T tempData = node1.getData();
+        node1.setData(node2.getData());
+        node2.setData(tempData);
     }
 }
